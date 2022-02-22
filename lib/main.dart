@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: ThemeData.light(),
+      home: const MyHomePage(title: 'Inno Companion'),
     );
   }
 }
@@ -29,21 +28,66 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Home',
+    ),
+    Text(
+      'Index 1: Create trip',
+    ),
+    Text(
+      'Index 2: My trips',
+    ),
+    Text(
+      'Index 3: Settings',
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        backgroundColor: Colors.cyan,
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.hail_rounded),
+            label: 'Поездки',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Создать поездку',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Мои поездки',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Настройки',
+            backgroundColor: Colors.cyan,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.white,
+        onTap: _onItemTapped,
       ),
     );
   }
