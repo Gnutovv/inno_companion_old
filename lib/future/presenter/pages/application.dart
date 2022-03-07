@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inno_companion/future/presenter/pages/create_trip_page.dart';
-import 'package:inno_companion/future/presenter/pages/home_page.dart';
+import 'package:inno_companion/future/presenter/pages/drivers_page.dart';
+import 'package:inno_companion/future/presenter/pages/passengers_page.dart';
 import 'package:inno_companion/future/presenter/pages/my_trips_page.dart';
 import 'package:inno_companion/future/presenter/pages/settings_page.dart';
 
@@ -30,7 +31,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
+    PassengerPage(),
+    DriverPage(),
     CreateTripPage(),
     MyTripsPage(),
     SettingsPage(),
@@ -46,7 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading: Icon(Icons),
         systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: Colors.cyan,
         centerTitle: true,
@@ -58,13 +59,18 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.hail_rounded),
-            label: 'Поездки',
+            icon: Icon(Icons.emoji_people),
+            label: 'Пассажиры',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.drive_eta_sharp),
+            label: 'Водители',
             backgroundColor: Colors.cyan,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Создать поездку',
+            label: 'Новая поездка',
             backgroundColor: Colors.cyan,
           ),
           BottomNavigationBarItem(
