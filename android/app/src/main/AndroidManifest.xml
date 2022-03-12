@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.inno_companion">
+    package="com.example.inno_commute">
    <application
-        android:label="inno_companion"
+        android:label="inno_commute"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

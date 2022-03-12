@@ -1,4 +1,4 @@
-import 'package:inno_companion/future/model/directions.dart';
+import 'package:inno_commute/future/model/directions.dart';
 
 class Trip {
   int id;

@@ -1,4 +1,4 @@
-# inno_companion
+# inno_commute
 
 A new Flutter project.
 

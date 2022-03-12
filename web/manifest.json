@@ -1,6 +1,6 @@
 {
-    "name": "inno_companion",
-    "short_name": "inno_companion",
+    "name": "inno_commute",
+    "short_name": "inno_commute",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

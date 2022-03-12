@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:inno_companion/future/presenter/pages/create_trip_page.dart';
-import 'package:inno_companion/future/presenter/pages/drivers_page.dart';
-import 'package:inno_companion/future/presenter/pages/passengers_page.dart';
-import 'package:inno_companion/future/presenter/pages/my_trips_page.dart';
-import 'package:inno_companion/future/presenter/pages/settings_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inno_commute/future/model/cubit/new_trip_cubit.dart';
+import 'package:inno_commute/future/presenter/pages/create_trip_page.dart';
+import 'package:inno_commute/future/presenter/pages/drivers_page.dart';
+import 'package:inno_commute/future/presenter/pages/passengers_page.dart';
+import 'package:inno_commute/future/presenter/pages/my_trips_page.dart';
+import 'package:inno_commute/future/presenter/pages/settings_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,9 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Inno Commute',
       theme: ThemeData.light(),
-      home: const MyHomePage(title: 'Inno Companion'),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<NewTripCubit>(
+            create: (context) => NewTripCubit(),
+          ),
+        ],
+        child: const MyHomePage(title: 'Inno Commute'),
+      ),
     );
   }
 }

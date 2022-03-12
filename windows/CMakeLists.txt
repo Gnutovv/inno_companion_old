@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(inno_companion LANGUAGES CXX)
+project(inno_commute LANGUAGES CXX)
 
-set(BINARY_NAME "inno_companion")
+set(BINARY_NAME "inno_commute")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inno_companion/future/presenter/res/text_const.dart';
-import 'package:inno_companion/future/presenter/res/widgets/icons.dart';
+import 'package:inno_commute/future/presenter/res/text_const.dart';
+import 'package:inno_commute/future/presenter/res/widgets/icons.dart';
 
 class PassengerPage extends StatelessWidget {
   const PassengerPage({Key? key}) : super(key: key);
