@@ -31,4 +31,9 @@ class NewTripCubit extends Cubit<NewTripState> {
     state.repository.setDirectionTo(city);
     emit(NewTripSetDirectionTo(state.repository));
   }
+
+  void addComment(String comment) {
+    state.repository.addComment(comment);
+    emit(NewTripAddComment(state.repository));
+  }
 }

@@ -62,8 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

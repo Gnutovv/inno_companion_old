@@ -33,4 +33,8 @@ class NewTripRepository {
     if (city == 'Наб. Челны') cityPosition = 3;
     trip.cityTo = Direction.values.elementAt(cityPosition);
   }
+
+  void addComment(String comment) {
+    if (comment != '') trip.comment = comment;
+  }
 }
