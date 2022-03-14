@@ -1,31 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inno_commute/future/model/cubit/new_trip_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inno_commute/future/model/repository/new_trip_repository.dart';
 
 class TypeOfTripSelector extends StatelessWidget {
-  const TypeOfTripSelector({Key? key}) : super(key: key);
+  TypeOfTripSelector({Key? key}) : super(key: key);
+  final TextStyle _unselectedTextStyle = const TextStyle(color: Colors.black);
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<NewTripCubit, NewTripState>(
-      builder: (context, state) {
-        return Container();
-      },
-    );
-  }
-}
-
-/*class TypeOfTripSelector extends StatefulWidget {
-  const TypeOfTripSelector({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<TypeOfTripSelector> createState() => _TypeOfTripSelectorState();
-}
-
-class _TypeOfTripSelectorState extends State<TypeOfTripSelector> {
-  bool _isPassenger = true;
   final ButtonStyle _activeButton = ElevatedButton.styleFrom(
     primary: Colors.cyan,
   );
@@ -36,46 +17,64 @@ class _TypeOfTripSelectorState extends State<TypeOfTripSelector> {
       width: 1,
     ),
   );
-  final TextStyle _unselectedTextStyle = const TextStyle(color: Colors.black);
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton.icon(
-          onPressed: () {
-            setState(() {
-              _isPassenger = true;
-            });
-          },
-          icon: Icon(
-            Icons.emoji_people,
-            color: _isPassenger ? Colors.white : Colors.cyan,
-          ),
-          label: Text(
-            'Я пассажир',
-            style: !_isPassenger ? _unselectedTextStyle : null,
-          ),
-          style: _isPassenger ? _activeButton : _notActiveButton,
-        ),
-        ElevatedButton.icon(
-          onPressed: () {
-            setState(() {
-              _isPassenger = false;
-            });
-          },
-          icon: Icon(
-            Icons.drive_eta_sharp,
-            color: !_isPassenger ? Colors.white : Colors.cyan,
-          ),
-          label: Text(
-            'Я водитель',
-            style: _isPassenger ? _unselectedTextStyle : null,
-          ),
-          style: !_isPassenger ? _activeButton : _notActiveButton,
-        ),
-      ],
+    return BlocBuilder<NewTripCubit, NewTripState>(
+      builder: (context, state) {
+        //context.read<NewTripCubit>().state.repository.trip.id;
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton.icon(
+              onPressed: () {
+                context.read<NewTripCubit>().switchToPassengerType();
+              },
+              icon: Icon(
+                Icons.emoji_people,
+                color:
+                    !context.read<NewTripCubit>().state.repository.trip.isDriver
+                        ? Colors.white
+                        : Colors.cyan,
+              ),
+              label: Text(
+                'Я пассажир',
+                style:
+                    context.read<NewTripCubit>().state.repository.trip.isDriver
+                        ? _unselectedTextStyle
+                        : null,
+              ),
+              style:
+                  !context.read<NewTripCubit>().state.repository.trip.isDriver
+                      ? _activeButton
+                      : _notActiveButton,
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                context.read<NewTripCubit>().switchToDriverType();
+              },
+              icon: Icon(
+                Icons.drive_eta_sharp,
+                color:
+                    context.read<NewTripCubit>().state.repository.trip.isDriver
+                        ? Colors.white
+                        : Colors.cyan,
+              ),
+              label: Text(
+                'Я водитель',
+                style:
+                    !context.read<NewTripCubit>().state.repository.trip.isDriver
+                        ? _unselectedTextStyle
+                        : null,
+              ),
+              style: context.read<NewTripCubit>().state.repository.trip.isDriver
+                  ? _activeButton
+                  : _notActiveButton,
+            ),
+          ],
+        );
+      },
     );
   }
 }
-*/

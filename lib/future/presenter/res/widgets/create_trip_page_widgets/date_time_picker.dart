@@ -1,34 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:inno_commute/future/model/cubit/new_trip_cubit.dart';
 
-class TripDateTimePicker extends StatefulWidget {
-  TripDateTimePicker({Key? key}) : super(key: key);
+class TripDateTimePicker extends StatelessWidget {
+  const TripDateTimePicker({Key? key}) : super(key: key);
 
-  DateTime selectedDate = DateTime.now();
-  bool wasSelected = false;
-  @override
-  State<TripDateTimePicker> createState() => _TripDateTimePickerState();
-}
-
-class _TripDateTimePickerState extends State<TripDateTimePicker> {
   @override
   Widget build(BuildContext context) {
     DateTime minDate = DateTime.now();
     DateTime maxDate = DateTime(minDate.year, minDate.month, minDate.day + 2,
         minDate.hour + 23, minDate.minute + 59);
-    return TextButton(
-        onPressed: () {
-          DatePicker.showDateTimePicker(context,
-              showTitleActions: true,
-              minTime: minDate,
-              maxTime: maxDate, onConfirm: (date) {
-            widget.selectedDate = date;
-            widget.wasSelected = true;
-            setState(() {});
-          }, currentTime: DateTime.now(), locale: LocaleType.ru);
-        },
-        child: widget.wasSelected
-            ? Text(widget.selectedDate.toLocal().toString().substring(0, 16))
-            : const Text('Выбрать дату и время поездки'));
+    bool wasSelected = false;
+    return BlocBuilder<NewTripCubit, NewTripState>(
+      builder: (context, state) {
+        return TextButton(
+            onPressed: () {
+              DatePicker.showDateTimePicker(context,
+                  showTitleActions: true,
+                  minTime: minDate,
+                  maxTime: maxDate, onConfirm: (date) {
+                context.read<NewTripCubit>().setDate(date);
+                wasSelected = true;
+              },
+                  currentTime:
+                      context.read<NewTripCubit>().state.repository.trip.time,
+                  locale: LocaleType.ru);
+            },
+            child: wasSelected
+                ? Text(context
+                    .read<NewTripCubit>()
+                    .state
+                    .repository
+                    .trip
+                    .time
+                    .toLocal()
+                    .toString()
+                    .substring(0, 16))
+                : const Text('Выбрать дату и время поездки'));
+      },
+    );
   }
 }

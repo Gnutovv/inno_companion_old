@@ -2,19 +2,23 @@ import 'package:inno_commute/future/model/directions.dart';
 
 class Trip {
   int id;
+  bool isDriver;
   String author;
   Direction cityFrom;
   Direction cityTo;
   DateTime time;
+  bool isComment;
   String comment;
   bool active;
   Trip({
-    required this.id,
-    required this.author,
-    required this.cityFrom,
-    required this.cityTo,
+    this.id = 0,
+    this.isDriver = false,
+    this.author = 'author',
+    this.cityFrom = Direction.innopolis,
+    this.cityTo = Direction.kazan,
     required this.time,
-    required this.comment,
-    required this.active,
+    this.isComment = false,
+    this.comment = '',
+    this.active = true,
   });
 }
